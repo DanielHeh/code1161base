@@ -90,11 +90,11 @@ def not_number_rejector(message):
     """
     passed = False
     while passed is False:
-        passed = True
         try:
-            inputted = int(str(raw_input(message)))
-        except ValueError:
-            passed = False
+            inputted = int(raw_input(message))
+            passed = True
+        except Exception:
+            print("need actual number")
     return inputted
     pass
 
@@ -110,9 +110,10 @@ def super_asker(low, high):
     while passed is False:
         passed = True
         try:
-            inputted = int(str(raw_input()))
-        except ValueError:
+            inputted = int(raw_input(low, high))
+        except Exception:
             passed = False
+            pass
         if low < inputted < high:
             passed = True
         else:
