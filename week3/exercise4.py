@@ -35,14 +35,12 @@ def binary_search(low, high, actual_number):
         count += 1
         guess = int((lower + higher)/2)
         print("guess: {}".format(guess))
-        if guess == actual_number:
-            guessed = True
-        elif guess > actual_number:
+        if guess > actual_number:
             if count == cases:
                 guess -= 1
                 guessed = True
             higher = guess
-        elif guess < actual_number:
+        else:
             if count == cases:
                 guess += 1
                 guessed = True

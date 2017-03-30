@@ -25,6 +25,8 @@ def success_is_relative():
     TIP: check that there ins't unwanted whitespace or line endings in the
          response. Look into .strip() and see what it does.
     """
+    filed = open("week1/pySuccessMessage.json")
+    print(filed.open())
     # this depends on excecution context. Take a look at your CWD and remember
     # that it changes.
     # print(path, CWD)
