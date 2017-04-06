@@ -25,12 +25,12 @@ def success_is_relative():
     TIP: check that there ins't unwanted whitespace or line endings in the
          response. Look into .strip() and see what it does.
     """
-    filed = open("week1/pySuccessMessage.json")
-    print(filed.open())
     # this depends on excecution context. Take a look at your CWD and remember
     # that it changes.
-    # print(path, CWD)
-    pass
+    pathfile = os.path.join(CWD, 'week1/pySuccessMessage.json')
+    filed = open(pathfile)
+    return filed.read().strip()
+    filed.close
 
 
 def get_some_details():
@@ -52,9 +52,14 @@ def get_some_details():
     json_data = open(LOCAL + "/lazyduck.json").read()
 
     data = json.loads(json_data)
-    return {"lastName":       None,
-            "password":       None,
-            "postcodePlusID": None
+    lastN = data['results'][0]['name']['last']
+    psw = data['results'][0]['login']['password']
+    psc = data['results'][0]['location']['postcode']
+    ID = data['results'][0]['id']['value']
+    pcid = int(psc) + int(ID)
+    return {"lastName":       lastN,
+            "password":       psw,
+            "postcodePlusID": pcid
             }
 
 
@@ -90,6 +95,10 @@ def wordy_pyramid():
     ]
     TIP: to add an argument to a URL, use: ?argName=argVal e.g. ?len=
     """
+    # http://randomword.setgetgo.com/get.php?len=length
+    print(requests.get("http://randomword.setgetgo.com/get.php?len=5"))
+    listed = []
+    listed.append("testing")
     pass
 
 
