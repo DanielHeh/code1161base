@@ -27,8 +27,8 @@ def success_is_relative():
     """
     # this depends on excecution context. Take a look at your CWD and remember
     # that it changes.
-    pathfile = os.path.join(CWD, 'week1/pySuccessMessage.json')
-    filed = open(pathfile)
+    pathfile = 'week1/pySuccessMessage.json'
+    filed = open(pathfile, "r")
     return filed.read().strip()
     filed.close
 
@@ -55,8 +55,8 @@ def get_some_details():
     lastN = data['results'][0]['name']['last']
     psw = data['results'][0]['login']['password']
     psc = data['results'][0]['location']['postcode']
-    ID = data['results'][0]['id']['value']
-    pcid = int(psc) + int(ID)
+    iidd = data['results'][0]['id']['value']
+    pcid = int(psc) + int(iidd)
     return {"lastName":       lastN,
             "password":       psw,
             "postcodePlusID": pcid
@@ -95,11 +95,24 @@ def wordy_pyramid():
     ]
     TIP: to add an argument to a URL, use: ?argName=argVal e.g. ?len=
     """
-    # http://randomword.setgetgo.com/get.php?len=length
-    print(requests.get("http://randomword.setgetgo.com/get.php?len=5"))
+    length = 3
     listed = []
-    listed.append("testing")
-    pass
+    reverse = False
+    while length is not 2:
+        url = 'http://randomword.setgetgo.com/get.php?len={}'.format(length)
+        word = requests.get(url)
+        word = word.text
+        word = word.encode("UTF-8")
+        listed.append(word)
+        print(word)
+        if reverse is False:
+            length += 2
+        else:
+            length -= 2
+        if length > 20:
+            length = 20
+            reverse = True
+    return listed
 
 
 def wunderground():
@@ -113,8 +126,9 @@ def wunderground():
          get very long. If you are accessing a thing often, assign it to a
          variable and then future access will be easier.
     """
+    # I GOT DA KEY: 276f211fa38482b0
     base = "http://api.wunderground.com/api/"
-    api_key = "YOUR KEY - REGISTER TO GET ONE"
+    api_key = "276f211fa38482b0"
     country = "AU"
     city = "Sydney"
     template = "{base}/{key}/conditions/q/{country}/{city}.json"
@@ -122,11 +136,14 @@ def wunderground():
     r = requests.get(url)
     the_json = json.loads(r.text)
     obs = the_json['current_observation']
-
-    return {"state":           None,
-            "latitude":        None,
-            "longitude":       None,
-            "local_tz_offset": None}
+    state = obs['display_location']['state']
+    latitude = obs['display_location']['latitude']
+    longitude = obs['display_location']['longitude']
+    timezone = obs['local_tz_offset']
+    return {"state":           state,
+            "latitude":        latitude,
+            "longitude":       longitude,
+            "local_tz_offset": timezone}
 
 
 def diarist():
@@ -142,7 +159,18 @@ def diarist():
     TIP: remember to commit 'lasers.pew' and push it to your repo, otherwise
          the test will have nothing to look at.
     """
-    pass
+    pathfile = 'week4/Trispokedovetiles(laser).gcode'
+    filed = open(pathfile, "r")
+    word = "M10 P1"
+    count = 0
+    for word in filed.read():
+        count += 1
+    filed.close
+    print(count)
+    a_pathfile = "/week4/lasers.pew"
+    laserfile = open(a_pathfile, "w")
+    laserfile.write(count)
+    laserfile.close()
 
 
 if __name__ == "__main__":
