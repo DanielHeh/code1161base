@@ -102,7 +102,6 @@ def wordy_pyramid():
         url = 'http://randomword.setgetgo.com/get.php?len={}'.format(length)
         word = requests.get(url)
         word = word.text
-        word = word.encode("UTF-8")
         listed.append(word)
         print(word)
         if reverse is False:
