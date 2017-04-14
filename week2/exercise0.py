@@ -25,8 +25,6 @@ def adder(a_number, another_number):
     Same as above, but with any two numbers.
     """
     number = a_number + another_number
-    number = float(str(number).strip("-"))
-    print(number)
     return number
     pass
 
