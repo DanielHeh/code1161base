@@ -15,14 +15,19 @@ def add_5(a_number):
         return a_number plus five
     except expressed in python, not english
     """
+    number = a_number + 5
+    return number
     pass
 
 
 def adder(a_number, another_number):
     """Add two numbers.
-
     Same as above, but with any two numbers.
     """
+    number = a_number + another_number
+    number = float(str(number).strip("-"))
+    print(number)
+    return number
     pass
 
 
@@ -34,6 +39,9 @@ def shout(a_string):
     or in any of the million places that google will give you.
     "python make a string uppercase" is a good starting search query.
     """
+    stringy = a_string
+    stringy = stringy.upper()
+    return stringy
     pass
 
 
@@ -44,6 +52,9 @@ def really_shout(a_string):
     from above.
     Look up how to 'concatinate' strings to make this happen.
     """
+    shouty = shout(a_string)
+    shouty = shouty + "!"
+    return shouty
     pass
 
 
