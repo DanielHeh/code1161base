@@ -9,7 +9,7 @@ You've got an hour.
 """
 from __future__ import division
 from __future__ import print_function
-import time
+# import time
 
 
 def greet(name="Towering Timmy"):
