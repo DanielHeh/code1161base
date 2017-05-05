@@ -195,7 +195,28 @@ def fast_filler(number_of_words=200):
     into and out of the file. Be careful when you read it back in, it'll
     convert integer keys to strings.
     """
-    pass
+    import json
+    import random
+    para = []
+    try:
+        filed = open("/week8/dict_racey.words").read()
+        d = json.load(filed)
+    except Exception:
+        d = make_filler_text_dictionary()
+        filed = open('dict_racey.words', 'w')
+        with open('dict_racey.words', 'w') as f:
+            json.dump(d, f)
+        f.close()
+    for each in range(1, number_of_words + 1):
+        key = random.randint(3, 7)
+        listed = d.get(key)
+        word = random.choice(listed)
+        para.append("{} ".format(word.lower()))
+    para = "".join(para)
+    para = para.rstrip()
+    para = para.capitalize() + "."
+    print(para)
+    return para
 
 
 if __name__ == '__main__':
