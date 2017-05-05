@@ -95,23 +95,33 @@ def wordy_pyramid():
     ]
     TIP: to add an argument to a URL, use: ?argName=argVal e.g. ?len=
     """
-    length = 3
-    listed = []
-    reverse = False
-    while length is not 2:
-        url = 'http://randomword.setgetgo.com/get.php?len={}'.format(length)
-        word = requests.get(url)
-        word = word.text
-        listed.append(word)
-        print(word)
-        if reverse is False:
-            length += 2
-        else:
-            length -= 2
-        if length > 20:
-            length = 20
-            reverse = True
+    list1 = list_of_words_with_lengths(range(3, 21, 2))
+    list2 = list_of_words_with_lengths(range(20, 3, -2))
+    listed = list1 + list2
     return listed
+
+
+def list_of_words_with_lengths(list_of_lengths):
+    """Docstring."""
+    listed = []
+    for i in list_of_lengths:
+        listed.append(get_a_word_of_length_n(i))
+    return listed
+
+
+def get_a_word_of_length_n(length):
+    """Docstring."""
+    try:
+        length = int(length)
+        if length > 0:
+            import requests
+            baseURL = "http://www.setgetgo.com/randomword/get.php?len="
+            url = baseURL + str(length)
+            r = requests.get(url)
+            message = r.text
+            return message
+    except Exception:
+        pass
 
 
 def wunderground():
